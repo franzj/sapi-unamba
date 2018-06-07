@@ -1,10 +1,16 @@
-const {app, BrowserWindow} = require('electron'),
-  isDev = require('electron-is-dev'),
-  path = require('path'),
-  url = require('url')
+import {app, BrowserWindow, ipcMain} from 'electron'
+import isDev from 'electron-is-dev'
+import path from 'path'
+import url from 'url'
+import events from './libs/ipcMainEvents'
 
 
 let mainWindow = null
+
+// Registramos los eventos del ipcMain
+for (let index = 0; index < events.length; index++) {
+  ipcMain.on(events[index].name, events[index].func)
+}
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
@@ -20,6 +26,7 @@ app.on('ready', () => {
 
   if (isDev) {
     mainWindow.loadURL('http://127.0.0.1:8080')
+    mainWindow.webContents.openDevTools()
   } else {
     mainWindow.loadURL(url.format({
       'pathname': path.join(__dirname, 'index.html'),
@@ -27,7 +34,6 @@ app.on('ready', () => {
       'slashes': true
     }))
   }
-
 
   mainWindow.on('closed', () => {
     mainWindow = null

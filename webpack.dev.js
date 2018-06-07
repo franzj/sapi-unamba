@@ -1,17 +1,18 @@
-const common = require('./webpack.common.js'),
-  merge = require('webpack-merge'),
-  path = require('path');
+import merge from 'webpack-merge'
+import path from 'path'
+import common from './webpack.common'
 
 
-module.exports = merge(common, {
+export default merge(common, {
   'devServer': {
     'contentBase': path.join(__dirname, 'src'),
     'historyApiFallback': true
   },
   'devtool': 'inline-source-map',
+  'mode': 'development',
   'output': {
     'filename': '[name].bundle.js',
     'path': path.join(__dirname, 'src'),
     'publicPath': '/'
   }
-});
+})

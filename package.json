@@ -8,9 +8,9 @@
     "url": "https://github.com/franzj/sapi-unamba.git"
   },
   "scripts": {
-    "devServer": "webpack-dev-server --mode development --config webpack.dev.js",
-    "dev": "concurrently \"npm run devServer\" \"wait-on http://localhost:8080 && electron .\"",
-    "build": "webpack --mode production --config webpack.prod.js"
+    "devServer": "webpack-dev-server -r babel-register --config webpack.dev.js",
+    "dev": "concurrently \"npm run devServer\" \"wait-on http://localhost:8080 && electron -r babel-register .\"",
+    "build": "webpack -r babel-register --config webpack.prod.js"
   },
   "license": "MIT",
   "dependencies": {

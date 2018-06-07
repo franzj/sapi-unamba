@@ -1,10 +1,11 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin'),
-  HtmlWebpackPlugin = require('html-webpack-plugin'),
-  path = require('path');
+import CleanWebpackPlugin from 'clean-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import path from 'path'
 
 
-module.exports = {
+export default {
   'entry': {'app': './src/app.jsx'},
+  'externals': {'electron': 'window.require("electron")'},
   'module': {
     'rules': [
       {
@@ -65,4 +66,4 @@ module.exports = {
     ]
   },
   'target': 'web'
-};
+}
