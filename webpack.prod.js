@@ -5,11 +5,11 @@ import common from './webpack.common'
 
 
 export default merge(common, {
-  'mode': 'production',
-  'output': {
-    'filename': '[name].bundle.js',
-    'path': path.join(__dirname, 'build/src'),
-    'publicPath': '/'
+  mode: 'production',
+  output: {
+    filename: '[name].bundle.js',
+    path: path.join(__dirname, 'build/src'),
+    publicPath: '/',
   },
-  'plugins': [new UglifyJSPlugin()]
+  plugins: [new UglifyJSPlugin()],
 })

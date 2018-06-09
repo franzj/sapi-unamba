@@ -4,15 +4,15 @@ import common from './webpack.common'
 
 
 export default merge(common, {
-  'devServer': {
-    'contentBase': path.join(__dirname, 'src'),
-    'historyApiFallback': true
+  devServer: {
+    contentBase: path.join(__dirname, 'src'),
+    historyApiFallback: true,
   },
-  'devtool': 'inline-source-map',
-  'mode': 'development',
-  'output': {
-    'filename': '[name].bundle.js',
-    'path': path.join(__dirname, 'src'),
-    'publicPath': '/'
-  }
+  devtool: 'inline-source-map',
+  mode: 'development',
+  output: {
+    filename: '[name].bundle.js',
+    path: path.join(__dirname, 'src'),
+    publicPath: '/',
+  },
 })

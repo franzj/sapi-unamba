@@ -1,30 +1,40 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import logo from 'images/logo.png'
-import {withStyles} from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles'
 import {
   Button,
   Fade,
   Grid,
   Icon,
-  Typography
+  Typography,
 } from '@material-ui/core'
 
 
-const styles = (theme) => ({
-  'root': {
-    'paddingTop': theme.spacing.unit * 10,
-    'textAlign': 'center'
-  }
+const styles = theme => ({
+  root: {
+    paddingTop: theme.spacing.unit * 10,
+    textAlign: 'center',
+  },
 })
 
 class Home extends Component {
-  render () {
-    const {classes} = this.props
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.state = {}
+  }
+
+  render() {
+    const { classes } = this.props
 
     return (
-      <Fade in={true}>
+      <Fade in>
         <Grid
           container
           spacing={32}
@@ -34,7 +44,7 @@ class Home extends Component {
           className={classes.root}
         >
           <Grid item>
-            <img src={logo} alt="logo"/>
+            <img src={logo} alt="logo" />
           </Grid>
           <Grid item>
             <Typography>
@@ -59,7 +69,5 @@ class Home extends Component {
   }
 }
 
-
-Home.propTypes = {'classes': PropTypes.object.isRequired}
 
 export default withStyles(styles)(Home)

@@ -1,23 +1,29 @@
-import React, {Component, Fragment} from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'utils/store'
-import {withStyles} from '@material-ui/core/styles'
+import { connect } from 'utils/store'
+import { withStyles } from '@material-ui/core/styles'
 
 
-const styles = (theme) => ({
-  'root': {
-    'paddingTop': theme.spacing.unit * 5,
-    'textAlign': 'center'
-  }
+const styles = theme => ({
+  root: {
+    paddingTop: theme.spacing.unit * 5,
+    textAlign: 'center',
+  },
 })
 
 class Report extends Component {
   static propTypes = {
-    'classes': PropTypes.object.isRequired
+    'classes': PropTypes.object.isRequired,
   }
 
-  render () {
-    const {classes} = this.props
+  constructor(props) {
+    super(props)
+
+    this.state = {}
+  }
+
+  render() {
+    const { classes } = this.props
 
     return (
       <Fragment>
@@ -26,5 +32,6 @@ class Report extends Component {
     )
   }
 }
+
 
 export default connect(withStyles(styles)(Report))

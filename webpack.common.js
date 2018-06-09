@@ -4,66 +4,67 @@ import path from 'path'
 
 
 export default {
-  'entry': {'app': './src/app.jsx'},
-  'externals': {'electron': 'window.require("electron")'},
-  'module': {
-    'rules': [
+  entry: {
+    app: './src/app.jsx',
+  },
+  externals: {
+    electron: 'window.require("electron")',
+  },
+  module: {
+    rules: [
       {
-        'exclude': /node_modules/,
-        'test': /\.(js|jsx)$/,
-        'use': {'loader': 'babel-loader'}
+        exclude: /node_modules/,
+        test: /\.(js|jsx)$/,
+        use: { loader: 'babel-loader' },
       },
       {
-        'test': /\.(png|jpg|gif|svg)$/,
-        'use': [
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [
           {
-            'loader': 'file-loader',
-            'options': {
-              'name': '[name].[ext]',
-              'outputPath': 'images/'
-            }
-          }
-        ]
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'images/',
+            },
+          },
+        ],
       },
       {
-        'test': /\.(css|scss)$/,
-        'use': [
+        test: /\.(css|scss)$/,
+        use: [
           'style-loader',
           'css-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
-        'loader': 'file-loader',
-        'options': {
-          'name': '[name].[ext]',
-          'outputPath': 'fonts/'
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'fonts/',
         },
-        'test': /\.(woff|woff2|ttf|eot|otf)$/
-      }
-    ]
+        test: /\.(woff|woff2|ttf|eot|otf)$/,
+      },
+    ],
   },
-  'plugins': [
+  plugins: [
     new CleanWebpackPlugin([
       'build',
-      'dist'
+      'dist',
     ]),
     new HtmlWebpackPlugin({
-      'chunks': ['app'],
-      'filename': 'index.html',
-      'template': 'src/index.html'
-    })
+      chunks: ['app'],
+      filename: 'index.html',
+      template: 'src/index.html',
+    }),
   ],
-  'resolve': {
-    'extensions': [
-      '.js',
-      '.jsx'
-    ],
-    'modules': [
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    modules: [
       path.resolve(__dirname, 'src'),
       path.resolve(__dirname, 'static'),
-      'node_modules'
-    ]
+      'node_modules',
+    ],
   },
-  'target': 'web'
+  target: 'web',
 }

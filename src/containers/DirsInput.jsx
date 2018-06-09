@@ -1,52 +1,46 @@
-import React, {Component, createRef} from 'react'
+import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'utils/store'
-import {blue} from '@material-ui/core/colors'
-import {withStyles} from '@material-ui/core/styles'
-import {
-  Button,
-  Icon,
-  TextField,
-  Typography,
-  Grid
-} from '@material-ui/core'
+import { connect } from 'utils/store'
+import { blue } from '@material-ui/core/colors'
+import { withStyles } from '@material-ui/core/styles'
+import { Button, Icon, TextField, Typography, Grid } from '@material-ui/core'
 
 
-const styles = (theme) => ({
-  'btnNext': {
-    'marginTop': theme.spacing.unit * 5
+const styles = theme => ({
+  btnNext: {
+    marginTop: theme.spacing.unit * 5,
   },
-  'dirsInputs': {
-    'visibility': 'hidden'
+  dirsInputs: {
+    visibility: 'hidden',
   },
-  'grid': {
-    'width': '100%'
+  grid: {
+    width: '100%',
   },
-  'icon': {
-    'fontSize': 32,
-    'margin': '-6px 12px'
+  icon: {
+    fontSize: 32,
+    margin: '-6px 12px',
   },
-  'textField': {
-    'width': 'calc(100% - 60px)'
+  textField: {
+    width: 'calc(100% - 60px)',
   },
-  'title': {
-    'color': blue[600]
-  }
+  title: {
+    color: blue[600],
+  },
 })
 
 class DirsInput extends Component {
   static propTypes = {
-    'actions': PropTypes.object.isRequired,
-    'classes': PropTypes.object.isRequired,
-    'state': PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
+    state: PropTypes.object.isRequired,
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
-      'errorAnalisysDir': false,
-      'errorProjectsDir': false
+      errorAnalisysDir: false,
+      errorProjectsDir: false,
     }
 
     this.dirProjectsRef = createRef()
@@ -55,15 +49,15 @@ class DirsInput extends Component {
     this.onSelectDir = this.onSelectDir.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.dirProjectsRef.current.webkitdirectory = true
     this.dirAnalisysRef.current.webkitdirectory = true
   }
 
-  onSelectDir (event) {
+  onSelectDir(event) {
     try {
-      const {searchPDFs} = this.props.actions
-      const {files: [dir], attributes: {targetdir}} = event.target
+      const { searchPDFs } = this.props.actions
+      const { files: [dir], attributes: { targetdir } } = event.target
 
       searchPDFs(dir.path, targetdir.value)
     } catch (error) {
@@ -71,12 +65,12 @@ class DirsInput extends Component {
     }
   }
 
-  render () {
-    const {classes, state: {inputDirs: {analisys, projects}}} = this.props
-    const {errorAnalisysDir, errorProjectsDir} = this.state
+  render() {
+    const { classes, state: { inputDirs: { analisys, projects } } } = this.props
+    const { errorAnalisysDir, errorProjectsDir } = this.state
 
     return (
-      <form onSubmit={(event) => event.preventDefault()}>
+      <form onSubmit={event => event.preventDefault()}>
         <Grid container alignItems="center" direction="column">
           <Grid item xs={10} className={classes.grid}>
             <Typography
@@ -166,5 +160,6 @@ class DirsInput extends Component {
     )
   }
 }
+
 
 export default connect(withStyles(styles)(DirsInput))

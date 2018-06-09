@@ -1,4 +1,4 @@
-import {app, BrowserWindow, ipcMain} from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import isDev from 'electron-is-dev'
 import path from 'path'
 import url from 'url'
@@ -8,18 +8,18 @@ import events from './libs/ipcMainEvents'
 let mainWindow = null
 
 // Registramos los eventos del ipcMain
-for (let index = 0; index < events.length; index++) {
-  ipcMain.on(events[index].name, events[index].func)
+for (let i = 0; i < events.length; i++) {
+  ipcMain.on(events[i].name, events[i].func)
 }
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
-    'height': 450,
-    'minHeight': 450,
-    'minWidth': 650,
-    'resizable': false,
-    'title': 'SAPI - UNAMBA',
-    'width': 650
+    height: 450,
+    minHeight: 450,
+    minWidth: 650,
+    resizable: false,
+    title: 'SAPI - UNAMBA',
+    width: 650,
   })
 
   mainWindow.setMenu(null)
@@ -29,9 +29,9 @@ app.on('ready', () => {
     mainWindow.webContents.openDevTools()
   } else {
     mainWindow.loadURL(url.format({
-      'pathname': path.join(__dirname, 'index.html'),
-      'protocol': 'file:',
-      'slashes': true
+      pathname: path.join(__dirname, 'index.html'),
+      protocol: 'file:',
+      slashes: true,
     }))
   }
 
