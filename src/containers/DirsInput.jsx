@@ -1,6 +1,6 @@
 import React, {Component, createRef} from 'react'
 import PropTypes from 'prop-types'
-import {ipcRenderer} from 'electron'
+import {connect} from 'utils/store'
 import {blue} from '@material-ui/core/colors'
 import {withStyles} from '@material-ui/core/styles'
 import {
@@ -10,79 +10,73 @@ import {
   Typography,
   Grid
 } from '@material-ui/core'
-import {
-  LIST_FILES_DIR_REQUEST,
-  LIST_FILES_DIR_RESPONSE
-} from 'utils/constants'
 
 
 const styles = (theme) => ({
-  'btnNext': {'marginTop': theme.spacing.unit * 5},
-  'dirsInputs': {'visibility': 'hidden'},
-  'grid': {'width': '100%'},
+  'btnNext': {
+    'marginTop': theme.spacing.unit * 5
+  },
+  'dirsInputs': {
+    'visibility': 'hidden'
+  },
+  'grid': {
+    'width': '100%'
+  },
   'icon': {
     'fontSize': 32,
     'margin': '-6px 12px'
   },
-  'textField': {'width': 'calc(100% - 60px)'},
-  'title': {'color': blue[600]}
+  'textField': {
+    'width': 'calc(100% - 60px)'
+  },
+  'title': {
+    'color': blue[600]
+  }
 })
 
 class DirsInput extends Component {
+  static propTypes = {
+    'actions': PropTypes.object.isRequired,
+    'classes': PropTypes.object.isRequired,
+    'state': PropTypes.object.isRequired
+  }
+
   constructor (props) {
     super(props)
 
     this.state = {
       'errorAnalisysDir': false,
-      'errorProjectsDir': false,
-      'selectedAnalisysDir': '',
-      'selectedProjectsDir': ''
+      'errorProjectsDir': false
     }
 
     this.dirProjectsRef = createRef()
     this.dirAnalisysRef = createRef()
 
-    this.getListDirs = this.getListDirs.bind(this)
-    this.onSelectProjectsDir = this.onSelectProjectsDir.bind(this)
-    this.onSelectAnalisysDir = this.onSelectAnalisysDir.bind(this)
+    this.onSelectDir = this.onSelectDir.bind(this)
   }
 
   componentDidMount () {
     this.dirProjectsRef.current.webkitdirectory = true
     this.dirAnalisysRef.current.webkitdirectory = true
-
-    ipcRenderer.on(LIST_FILES_DIR_RESPONSE, this.getListDirs);
   }
 
-  getListDirs (event, files) {
-    console.log(files);
-  }
+  onSelectDir (event) {
+    try {
+      const {searchPDFs} = this.props.actions
+      const {files: [dir], attributes: {targetdir}} = event.target
 
-  onSelectProjectsDir (event) {
-    const {'files': [currentDir]} = event.target
-
-    this.setState({'selectedProjectsDir': currentDir.path})
-    ipcRenderer.send(LIST_FILES_DIR_REQUEST, {'path': currentDir.path})
-  }
-
-  onSelectAnalisysDir (event) {
-    const {'files': [currentDir]} = event.target
-
-    this.setState({'selectedAnalisysDir': currentDir.path})
-    ipcRenderer.send(LIST_FILES_DIR_REQUEST, {'path': currentDir.path})
+      searchPDFs(dir.path, targetdir.value)
+    } catch (error) {
+      // Pass
+    }
   }
 
   render () {
-    const {classes} = this.props
-    const {
-      errorAnalisysDir,
-      errorProjectsDir,
-      selectedAnalisysDir,
-      selectedProjectsDir
-    } = this.state
+    const {classes, state: {inputDirs: {analisys, projects}}} = this.props
+    const {errorAnalisysDir, errorProjectsDir} = this.state
 
     return (
-      <form>
+      <form onSubmit={(event) => event.preventDefault()}>
         <Grid container alignItems="center" direction="column">
           <Grid item xs={10} className={classes.grid}>
             <Typography
@@ -102,7 +96,7 @@ class DirsInput extends Component {
               id="dir-projects"
               label="Directorio de banco de proyectos"
               margin="normal"
-              value={selectedProjectsDir}
+              value={projects.path}
               helperText={errorProjectsDir
                 ? 'Seleccione la carpeta con el banco de proyectos.'
                 : null
@@ -126,7 +120,7 @@ class DirsInput extends Component {
               id="dir-analisys"
               label="Directorio de entrada de análisis"
               margin="normal"
-              value={selectedAnalisysDir}
+              value={analisys.path}
               helperText={errorAnalisysDir
                 ? 'Seleccione la carpeta con proyectos a analizar.'
                 : null
@@ -137,7 +131,7 @@ class DirsInput extends Component {
               color="primary"
               variant="fab"
               onClick={() => {
-                this.dirAnalisysRef.current.click('analisys')
+                this.dirAnalisysRef.current.click()
               }}
             >
               <Icon>folder_open</Icon>
@@ -155,15 +149,17 @@ class DirsInput extends Component {
 
           <input
             type="file"
+            targetdir="projects"
             ref={this.dirProjectsRef}
             className={classes.dirsInputs}
-            onChange={this.onSelectProjectsDir}
+            onChange={this.onSelectDir}
           />
           <input
             type="file"
+            targetdir="analisys"
             ref={this.dirAnalisysRef}
             className={classes.dirsInputs}
-            onChange={this.onSelectAnalisysDir}
+            onChange={this.onSelectDir}
           />
         </Grid>
       </form>
@@ -171,7 +167,4 @@ class DirsInput extends Component {
   }
 }
 
-
-DirsInput.propTypes = {'classes': PropTypes.object.isRequired}
-
-export default withStyles(styles)(DirsInput)
+export default connect(withStyles(styles)(DirsInput))

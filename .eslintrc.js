@@ -10,11 +10,13 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "jsx": true
     },
+    "ecmaVersion": 2017,
     "sourceType": "module"
   },
   "plugins": [
@@ -206,7 +208,6 @@ module.exports = {
     "no-whitespace-before-property": "error",
     "no-with": "error",
     "nonblock-statement-body-position": "error",
-    "object-curly-newline": "error",
     "object-curly-spacing": [
       "error",
       "never"
@@ -226,7 +227,6 @@ module.exports = {
     "prefer-rest-params": "error",
     "prefer-spread": "error",
     "prefer-template": "error",
-    "quote-props": "error",
     "quotes": [
       "error",
       "single"

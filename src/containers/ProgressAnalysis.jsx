@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'utils/store'
 import {withStyles} from '@material-ui/core/styles'
 
 
@@ -11,6 +12,10 @@ const styles = (theme) => ({
 })
 
 class ProgressAnalysis extends Component {
+  static propTypes = {
+    'classes': PropTypes.object.isRequired
+  }
+
   render () {
     const {classes} = this.props
 
@@ -22,7 +27,4 @@ class ProgressAnalysis extends Component {
   }
 }
 
-
-ProgressAnalysis.propTypes = {'classes': PropTypes.object.isRequired}
-
-export default withStyles(styles)(ProgressAnalysis)
+export default connect(withStyles(styles)(ProgressAnalysis))

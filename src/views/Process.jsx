@@ -25,6 +25,7 @@ class Process extends Component {
 
     this.handleNext = this.handleNext.bind(this)
     this.handleBack = this.handleBack.bind(this)
+    this.getStepProcess = this.getStepProcess.bind(this)
   }
 
   handleNext () {
@@ -38,15 +39,18 @@ class Process extends Component {
   getStepProcess () {
     const {activeStep} = this.state
 
-    if (activeStep === 0) {
-      return <DirsInput/>
-    } else if (activeStep === 1) {
-      return <StartAnalysis/>
-    } else if (activeStep === 2) {
-      return <ProgressAnalysis/>
+    switch (activeStep) {
+    case 0:
+      return <DirsInput />
+    case 1:
+      return <StartAnalysis />
+    case 2:
+      return <ProgressAnalysis />
+    case 3:
+      return <Report />
+    default:
+      return null
     }
-
-    return <Report/>
   }
 
   render () {
