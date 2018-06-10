@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import {
-  Fade,
-  Grid,
-} from '@material-ui/core'
+import { Fade, Grid } from '@material-ui/core'
 
 
 const styles = theme => ({
@@ -14,7 +11,8 @@ const styles = theme => ({
   },
 })
 
-class Help extends Component {
+@withStyles(styles)
+export default class Help extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
   }
@@ -42,6 +40,3 @@ class Help extends Component {
     )
   }
 }
-
-
-export default withStyles(styles)(Help)

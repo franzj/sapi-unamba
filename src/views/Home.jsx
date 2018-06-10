@@ -3,13 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import logo from 'images/logo.png'
 import { withStyles } from '@material-ui/core/styles'
-import {
-  Button,
-  Fade,
-  Grid,
-  Icon,
-  Typography,
-} from '@material-ui/core'
+import { Button, Fade, Grid, Icon, Typography } from '@material-ui/core'
 
 
 const styles = theme => ({
@@ -19,7 +13,8 @@ const styles = theme => ({
   },
 })
 
-class Home extends Component {
+@withStyles(styles)
+export default class Home extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
   }
@@ -68,6 +63,3 @@ class Home extends Component {
     )
   }
 }
-
-
-export default withStyles(styles)(Home)

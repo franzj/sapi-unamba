@@ -2,14 +2,14 @@ import { PDF_LIST_RESPONSE } from 'utils/constants'
 
 
 function getPDFsNameFromDir(event, args, state) {
-  const { inputDirs } = state
+  const { dirs } = state
 
-  inputDirs[args.targetDir] = {
+  dirs[args.targetDir] = {
     files: args.files,
     path: args.path,
   }
 
-  return { ...state, inputDirs: { ...inputDirs } }
+  return { ...state, dirs: { ...dirs } }
 }
 
 

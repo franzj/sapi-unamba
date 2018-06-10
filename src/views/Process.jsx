@@ -1,14 +1,22 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'utils/store'
 import { DirsInput, StartAnalysis, ProgressAnalysis, Report } from 'containers'
 import { Fade, Grid, Step, Stepper, StepLabel } from '@material-ui/core'
 
 
-class Process extends Component {
+@connect
+export default class Process extends Component {
+  static propTypes = {
+    state: PropTypes.shape({
+      step: PropTypes.number.isRequired,
+    }).isRequired,
+  }
+
   constructor(props) {
     super(props)
 
     this.state = {
-      activeStep: 0,
       steps: [
         'Seleccionar directorios',
         'Listo para iniciar análisis',
@@ -18,14 +26,10 @@ class Process extends Component {
     }
 
     this.getStepProcess = this.getStepProcess.bind(this)
-    this.handleNext = this.handleNext.bind(this)
-    this.handleBack = this.handleBack.bind(this)
   }
 
-  getStepProcess() {
-    const { activeStep } = this.state
-
-    switch (activeStep) {
+  getStepProcess(step) {
+    switch (step) {
       case 0:
         return <DirsInput />
       case 1:
@@ -39,26 +43,15 @@ class Process extends Component {
     }
   }
 
-  handleNext() {
-    this.setState(prevState => ({
-      activeStep: prevState.activeStep + 1,
-    }))
-  }
-
-  handleBack() {
-    this.setState(prevState => ({
-      activeStep: prevState.activeStep - 1,
-    }))
-  }
-
   render() {
-    const { activeStep, steps } = this.state
+    const { steps } = this.state
+    const { state: { step } } = this.props
 
     return (
       <Fade in>
         <Grid container spacing={24} direction="column">
           <Grid item>
-            <Stepper activeStep={activeStep} alternativeLabel>
+            <Stepper activeStep={step} alternativeLabel>
               {steps.map(label => (
                 <Step key={label}>
                   <StepLabel>{label}</StepLabel>
@@ -67,13 +60,10 @@ class Process extends Component {
             </Stepper>
           </Grid>
           <Grid item>
-            {this.getStepProcess()}
+            {this.getStepProcess(step)}
           </Grid>
         </Grid>
       </Fade>
     )
   }
 }
-
-
-export default Process

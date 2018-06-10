@@ -15,11 +15,19 @@ module.exports = {
     "ecmaVersion": 7,
     "sourceType": "module"
   },
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import"
+  ],
   "rules": {
+    "class-methods-use-this": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "no-plusplus": "off",
+    'react/forbid-prop-types': 'off',
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/no-unused-state": "off",
     "semi": "off",
     "semi-spacing": "error",
     "semi-style": [

@@ -11,7 +11,9 @@ const styles = theme => ({
   },
 })
 
-class ProgressAnalysis extends Component {
+@connect
+@withStyles(styles)
+export default class ProgressAnalysis extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
   }
@@ -32,6 +34,3 @@ class ProgressAnalysis extends Component {
     )
   }
 }
-
-
-export default connect(withStyles(styles)(ProgressAnalysis))

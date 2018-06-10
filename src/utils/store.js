@@ -1,7 +1,7 @@
 import React, { Component, createContext } from 'react'
 import PropTypes from 'prop-types'
+import events from 'libs/ipcRendererEvents'
 import { ipcRenderer } from 'electron'
-import { events } from 'libs/ipcRendererEvents'
 import { searchPDFs } from 'utils/actions'
 
 
@@ -18,12 +18,15 @@ class Provider extends Component {
     this.state = {
       actions: {
         searchPDFs,
+        handleNext: this.handleNext,
+        handleBack: this.handleBack,
       },
       state: {
-        inputDirs: {
+        dirs: {
           analisys: { files: [], path: '' },
           projects: { files: [], path: '' },
         },
+        step: 0,
       },
     }
   }
@@ -41,6 +44,26 @@ class Provider extends Component {
     }
   }
 
+  handleNext = () => {
+    const { step } = this.state.state
+
+    if (step < 3) {
+      this.setState(prevState => ({
+        state: { ...prevState.state, step: prevState.state.step + 1 },
+      }))
+    }
+  }
+
+  handleBack = () => {
+    const { step } = this.state.state
+
+    if (step > 0) {
+      this.setState(prevState => ({
+        state: { ...prevState.state, step: prevState.state.step - 1 },
+      }))
+    }
+  }
+
   render() {
     const { children } = this.props
 
@@ -53,15 +76,11 @@ class Provider extends Component {
 }
 
 function connect(WrappedComponent) {
-  function render() {
-    return (
-      <Context.Consumer>
-        {context => <WrappedComponent {...context} />}
-      </Context.Consumer>
-    )
-  }
-
-  return () => render()
+  return () => (
+    <Context.Consumer>
+      {context => <WrappedComponent {...context} />}
+    </Context.Consumer>
+  )
 }
 
 

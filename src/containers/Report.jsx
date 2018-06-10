@@ -11,9 +11,11 @@ const styles = theme => ({
   },
 })
 
-class Report extends Component {
+@connect
+@withStyles(styles)
+export default class Report extends Component {
   static propTypes = {
-    'classes': PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -32,6 +34,3 @@ class Report extends Component {
     )
   }
 }
-
-
-export default connect(withStyles(styles)(Report))
