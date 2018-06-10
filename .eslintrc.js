@@ -23,6 +23,11 @@ module.exports = {
   "rules": {
     "class-methods-use-this": "off",
     "import/extensions": "off",
+    "import/no-extraneous-dependencies": [
+      "error", {
+        "devDependencies": true
+      }
+    ],
     "import/no-unresolved": "off",
     "no-plusplus": "off",
     'react/forbid-prop-types': 'off',

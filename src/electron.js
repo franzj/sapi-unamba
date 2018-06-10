@@ -1,3 +1,4 @@
+import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer'
 import { app, BrowserWindow, ipcMain } from 'electron'
 import isDev from 'electron-is-dev'
 import path from 'path'
@@ -12,7 +13,7 @@ for (let i = 0; i < events.length; i++) {
   ipcMain.on(events[i].name, events[i].func)
 }
 
-app.on('ready', () => {
+app.on('ready', async () => {
   mainWindow = new BrowserWindow({
     height: 450,
     minHeight: 450,
@@ -26,7 +27,13 @@ app.on('ready', () => {
 
   if (isDev) {
     mainWindow.loadURL('http://127.0.0.1:8080')
-    mainWindow.webContents.openDevTools()
+
+    try {
+      await installExtension(REACT_DEVELOPER_TOOLS)
+      mainWindow.webContents.openDevTools()
+    } catch (error) {
+      // Pass
+    }
   } else {
     mainWindow.loadURL(url.format({
       pathname: path.join(__dirname, 'index.html'),

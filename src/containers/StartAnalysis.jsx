@@ -29,7 +29,7 @@ export default class StartAnalysis extends Component {
 
     return (
       <Fragment>
-        directorios
+        <div />
       </Fragment>
     )
   }
