@@ -15,12 +15,12 @@ for (let i = 0; i < events.length; i++) {
 
 app.on('ready', async () => {
   mainWindow = new BrowserWindow({
-    height: 450,
-    minHeight: 450,
-    minWidth: 650,
+    height: 500,
+    minHeight: 500,
+    minWidth: 700,
     resizable: false,
     title: 'SAPI - UNAMBA',
-    width: 650,
+    width: 700,
   })
 
   mainWindow.setMenu(null)
