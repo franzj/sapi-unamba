@@ -15,8 +15,8 @@ for (let i = 0; i < events.length; i++) {
 
 app.on('ready', async () => {
   mainWindow = new BrowserWindow({
-    height: 500,
-    minHeight: 500,
+    height: 530,
+    minHeight: 530,
     minWidth: 700,
     resizable: false,
     title: 'SAPI - UNAMBA',

@@ -21,9 +21,6 @@ const styles = theme => ({
   root: {
     padding: `0 ${theme.spacing.unit * 4}px`,
   },
-  card: {
-    height: 270,
-  },
   list: {
     borderBottom: '1px solid #bdbdbd',
     borderTop: '1px solid #bdbdbd',
@@ -73,7 +70,7 @@ export default class StartAnalysis extends Component {
     const { classes, actions, state: { dirs: { projects, analisys } } } = this.props
 
     return (
-      <Grid container spacing={8} justify="space-between" className={classes.root}>
+      <Grid container spacing={24} className={classes.root}>
         <Grid item xs={12} sm={12}>
           <Grid container justify="space-between">
             <Grid item>
@@ -101,7 +98,7 @@ export default class StartAnalysis extends Component {
           </Grid>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Card className={classes.card}>
+          <Card>
             <CardHeader
               avatar={
                 <Avatar aria-label="Recipe">
@@ -133,7 +130,7 @@ export default class StartAnalysis extends Component {
           </Card>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Card className={classes.card}>
+          <Card>
             <CardHeader
               avatar={
                 <Avatar aria-label="Recipe">
