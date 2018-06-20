@@ -16,7 +16,6 @@ import {
   Typography,
 } from '@material-ui/core'
 
-
 const styles = theme => ({
   root: {
     padding: `0 ${theme.spacing.unit * 4}px`,
@@ -67,30 +66,26 @@ export default class StartAnalysis extends Component {
   }
 
   render() {
-    const { classes, actions, state: { dirs: { projects, analisys } } } = this.props
+    const {
+      classes,
+      actions,
+      state: {
+        dirs: { projects, analisys },
+      },
+    } = this.props
 
     return (
       <Grid container spacing={24} className={classes.root}>
         <Grid item xs={12} sm={12}>
           <Grid container justify="space-between">
             <Grid item>
-              <Button
-                size="small"
-                color="primary"
-                variant="contained"
-                onClick={actions.handleBack}
-              >
+              <Button size="small" color="primary" variant="contained" onClick={actions.handleBack}>
                 <Icon>arrow_back</Icon>
                 Retroceder
               </Button>
             </Grid>
             <Grid item>
-              <Button
-                size="small"
-                color="primary"
-                variant="contained"
-                onClick={actions.handleNext}
-              >
+              <Button size="small" color="primary" variant="contained" onClick={actions.handleNext}>
                 Continuar
                 <Icon>arrow_forward</Icon>
               </Button>
@@ -109,20 +104,14 @@ export default class StartAnalysis extends Component {
               subheader={projects.path}
             />
             <CardContent>
-              <Typography variant="title">
-                Lista de Archivos PDFs
-              </Typography>
+              <Typography variant="title">Lista de Archivos PDFs</Typography>
               <List className={classes.list}>
                 {projects.files.map(file => (
                   <ListItem key={file} className={classes.listItem}>
                     <ListItemIcon>
-                      <Icon className={classes.listIcon}>
-                        folder
-                      </Icon>
+                      <Icon className={classes.listIcon}>folder</Icon>
                     </ListItemIcon>
-                    <span className={classes.listItemText}>
-                      {file}
-                    </span>
+                    <span className={classes.listItemText}>{file}</span>
                   </ListItem>
                 ))}
               </List>
@@ -141,20 +130,14 @@ export default class StartAnalysis extends Component {
               subheader={analisys.path}
             />
             <CardContent>
-              <Typography variant="title">
-                Lista de Archivos PDFs
-              </Typography>
+              <Typography variant="title">Lista de Archivos PDFs</Typography>
               <List className={classes.list}>
                 {analisys.files.map(file => (
                   <ListItem key={file} className={classes.listItem}>
                     <ListItemIcon>
-                      <Icon className={classes.listIcon}>
-                        folder
-                      </Icon>
+                      <Icon className={classes.listIcon}>folder</Icon>
                     </ListItemIcon>
-                    <span className={classes.listItemText}>
-                      {file}
-                    </span>
+                    <span className={classes.listItemText}>{file}</span>
                   </ListItem>
                 ))}
               </List>

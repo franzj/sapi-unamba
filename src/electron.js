@@ -5,13 +5,12 @@ import path from 'path'
 import url from 'url'
 import events from './libs/ipcMainEvents'
 
-
 let mainWindow = null
 
 // Registramos los eventos del ipcMain
-for (let i = 0; i < events.length; i++) {
-  ipcMain.on(events[i].name, events[i].func)
-}
+events.forEach((event) => {
+  ipcMain.on(event.name, event.func)
+})
 
 app.on('ready', async () => {
   mainWindow = new BrowserWindow({

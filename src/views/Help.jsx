@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Fade, Grid } from '@material-ui/core'
 
-
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 10,
@@ -15,12 +14,6 @@ const styles = theme => ({
 export default class Help extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {}
   }
 
   render() {

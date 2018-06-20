@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'utils/store'
 import { withStyles } from '@material-ui/core/styles'
 
-
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 5,
@@ -27,10 +26,6 @@ export default class Report extends Component {
   render() {
     const { classes } = this.props
 
-    return (
-      <Fragment>
-        directorios
-      </Fragment>
-    )
+    return <Fragment>directorios</Fragment>
   }
 }

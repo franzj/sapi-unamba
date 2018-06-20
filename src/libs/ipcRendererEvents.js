@@ -1,6 +1,5 @@
 import { PDF_LIST_RESPONSE } from 'utils/constants'
 
-
 function getPDFsNameFromDir(event, args, state) {
   const { dirs } = state
 
@@ -11,7 +10,6 @@ function getPDFsNameFromDir(event, args, state) {
 
   return { ...state, dirs: { ...dirs } }
 }
-
 
 export default [
   {

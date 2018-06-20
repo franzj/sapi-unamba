@@ -5,7 +5,6 @@ import { connect } from 'utils/store'
 import { DirsInput, StartAnalysis, ProgressAnalysis, Report } from 'containers'
 import { Fade, Grid, Step, Stepper, StepLabel } from '@material-ui/core'
 
-
 @connect
 @hot(module)
 export default class Process extends Component {
@@ -15,22 +14,16 @@ export default class Process extends Component {
     }).isRequired,
   }
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      steps: [
-        'Seleccionar directorios',
-        'Listo para iniciar análisis',
-        'Analizando archivos',
-        'Reporte de análisis',
-      ],
-    }
-
-    this.getStepProcess = this.getStepProcess.bind(this)
+  state = {
+    steps: [
+      'Seleccionar directorios',
+      'Listo para iniciar análisis',
+      'Analizando archivos',
+      'Reporte de análisis',
+    ],
   }
 
-  getStepProcess(step) {
+  getStepProcess = (step) => {
     switch (step) {
       case 0:
         return <DirsInput />
@@ -47,7 +40,9 @@ export default class Process extends Component {
 
   render() {
     const { steps } = this.state
-    const { state: { step } } = this.props
+    const {
+      state: { step },
+    } = this.props
 
     return (
       <Fade in>
@@ -61,9 +56,7 @@ export default class Process extends Component {
               ))}
             </Stepper>
           </Grid>
-          <Grid item>
-            {this.getStepProcess(step)}
-          </Grid>
+          <Grid item>{this.getStepProcess(step)}</Grid>
         </Grid>
       </Fade>
     )

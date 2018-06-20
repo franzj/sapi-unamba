@@ -1,8 +1,7 @@
-import webpack from 'webpack'
+import { HotModuleReplacementPlugin } from 'webpack'
 import merge from 'webpack-merge'
 import path from 'path'
 import common from './webpack.common'
-
 
 export default merge(common, {
   devServer: {
@@ -17,7 +16,5 @@ export default merge(common, {
     path: path.join(__dirname, 'src'),
     publicPath: '/',
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins: [new HotModuleReplacementPlugin()],
 })

@@ -43,9 +43,6 @@ export default class DirsInput extends Component {
 
     this.dirProjectsRef = createRef()
     this.dirAnalisysRef = createRef()
-
-    this.onNextStep = this.onNextStep.bind(this)
-    this.onSelectDir = this.onSelectDir.bind(this)
   }
 
   componentDidMount() {
@@ -53,7 +50,7 @@ export default class DirsInput extends Component {
     this.dirAnalisysRef.current.webkitdirectory = true
   }
 
-  onNextStep() {
+  onNextStep = () => {
     const { actions, state: { dirs: { analisys, projects } } } = this.props
     const errorAnalisysDir = analisys.files.length === 0
     const errorProjectsDir = projects.files.length === 0
@@ -68,7 +65,7 @@ export default class DirsInput extends Component {
     }
   }
 
-  onSelectDir(event) {
+  onSelectDir = (event) => {
     try {
       const { searchPDFs } = this.props.actions
       const { files: [dir], attributes: { targetdir } } = event.target

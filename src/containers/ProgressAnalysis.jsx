@@ -19,7 +19,6 @@ import {
   Typography,
 } from '@material-ui/core'
 
-
 const styles = theme => ({
   root: {
     padding: `0 ${theme.spacing.unit * 4}px`,
@@ -48,24 +47,23 @@ export default class ProgressAnalysis extends Component {
     }).isRequired,
   }
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      open: false,
-    }
-
-    this.handleCancel = this.handleCancel.bind(this)
+  state = {
+    open: false,
   }
 
-  handleCancel() {
-    const { actions: { handleBack } } = this.props
+  handleCancel = () => {
+    const {
+      actions: { handleBack },
+    } = this.props
 
     handleBack()
   }
 
   render() {
-    const { actions: { handleNext }, classes } = this.props
+    const {
+      actions: { handleNext },
+      classes,
+    } = this.props
     const { open } = this.state
 
     return (
@@ -77,9 +75,11 @@ export default class ProgressAnalysis extends Component {
                 size="small"
                 color="secondary"
                 variant="contained"
-                onClick={() => this.setState({
-                  open: true,
-                })}
+                onClick={() =>
+                  this.setState({
+                    open: true,
+                  })
+                }
               >
                 <Icon>cancel</Icon>
                 Cancelar
@@ -142,9 +142,7 @@ export default class ProgressAnalysis extends Component {
                     warning
                   </Icon>
                 </Grid>
-                <Grid item>
-                  ¿Estás seguro que deceas cancelar?
-                </Grid>
+                <Grid item>¿Estás seguro que deceas cancelar?</Grid>
               </Grid>
             </DialogTitle>
             <DialogContent>
@@ -155,9 +153,11 @@ export default class ProgressAnalysis extends Component {
             <DialogActions>
               <Button
                 color="primary"
-                onClick={() => this.setState({
-                  open: false,
-                })}
+                onClick={() =>
+                  this.setState({
+                    open: false,
+                  })
+                }
               >
                 Cancelar
               </Button>

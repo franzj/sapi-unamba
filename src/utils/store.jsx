@@ -4,7 +4,6 @@ import events from 'libs/ipcRendererEvents'
 import { ipcRenderer } from 'electron'
 import { searchPDFs } from 'utils/actions'
 
-
 const Context = createContext()
 
 class Provider extends Component {
@@ -33,15 +32,13 @@ class Provider extends Component {
 
   componentDidMount() {
     // Registramos los eventos del ipcRenderer
-    for (let index = 0; index < events.length; index++) {
-      ipcRenderer.on(events[index].name, (event, args) => {
+    events.forEach((event) => {
+      ipcRenderer.on(event.name, (event_, args) => {
         const { state } = this.state
 
-        this.setState({
-          state: events[index].func(event, args, state),
-        })
+        this.setState({ state: event.func(event_, args, state) })
       })
-    }
+    })
   }
 
   handleNext = () => {
@@ -67,24 +64,12 @@ class Provider extends Component {
   render() {
     const { children } = this.props
 
-    return (
-      <Context.Provider value={this.state}>
-        {children}
-      </Context.Provider>
-    )
+    return <Context.Provider value={this.state}>{children}</Context.Provider>
   }
 }
 
-function connect(WrappedComponent) {
-  return () => (
-    <Context.Consumer>
-      {context => <WrappedComponent {...context} />}
-    </Context.Consumer>
-  )
-}
+const connect = WrappedComponent => () => (
+  <Context.Consumer>{context => <WrappedComponent {...context} />}</Context.Consumer>
+)
 
-
-export {
-  Provider,
-  connect,
-}
+export { Provider, connect }

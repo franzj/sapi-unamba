@@ -1,7 +1,5 @@
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import path from 'path'
-
 
 export default {
   entry: {
@@ -31,11 +29,7 @@ export default {
       },
       {
         test: /\.(css|scss)$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         loader: 'file-loader',
@@ -48,10 +42,7 @@ export default {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin([
-      'build',
-      'dist',
-    ]),
+    new CleanWebpackPlugin(['build', 'dist']),
     new HtmlWebpackPlugin({
       chunks: ['app'],
       filename: 'index.html',
@@ -60,11 +51,7 @@ export default {
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
-    modules: [
-      path.resolve(__dirname, 'src'),
-      path.resolve(__dirname, 'static'),
-      'node_modules',
-    ],
+    modules: ['src', 'static', 'node_modules'],
   },
   target: 'web',
 }

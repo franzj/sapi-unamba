@@ -5,7 +5,6 @@ import logo from 'images/logo.png'
 import { withStyles } from '@material-ui/core/styles'
 import { Button, Fade, Grid, Icon, Typography } from '@material-ui/core'
 
-
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 10,
@@ -17,12 +16,6 @@ const styles = theme => ({
 export default class Home extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {}
   }
 
   render() {
@@ -42,20 +35,12 @@ export default class Home extends Component {
             <img src={logo} alt="logo" />
           </Grid>
           <Grid item>
-            <Typography>
-              SAPI
-            </Typography>
+            <Typography>SAPI</Typography>
           </Grid>
           <Grid item>
-            <Button
-              size="large"
-              color="primary"
-              variant="raised"
-              component={Link}
-              to="/process"
-            >
+            <Button size="large" color="primary" variant="raised" component={Link} to="/process">
               Iniciar proceso
-              <Icon>arrow_right_alt</Icon>
+              <Icon>arrow_forward</Icon>
             </Button>
           </Grid>
         </Grid>
