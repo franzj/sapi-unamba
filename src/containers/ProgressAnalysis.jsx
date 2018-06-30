@@ -7,7 +7,6 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -44,6 +43,15 @@ export default class ProgressAnalysis extends Component {
     actions: PropTypes.shape({
       handleNext: PropTypes.func.isRequired,
       handleBack: PropTypes.func.isRequired,
+      startAnalysis: PropTypes.func.isRequired,
+      stopAnalysis: PropTypes.func.isRequired,
+    }).isRequired,
+    state: PropTypes.shape({
+      analyzing: PropTypes.shape({
+        info: PropTypes.string.isRequired,
+        progress: PropTypes.number.isRequired,
+        verbose: PropTypes.string.isRequired,
+      }).isRequired,
     }).isRequired,
   }
 
@@ -51,18 +59,39 @@ export default class ProgressAnalysis extends Component {
     open: false,
   }
 
-  handleCancel = () => {
+  async componentDidMount() {
     const {
-      actions: { handleBack },
+      actions: { startAnalysis },
+      state: { dirs },
     } = this.props
 
-    handleBack()
+    try {
+      await startAnalysis(dirs)
+    } catch (error) {
+      // pass
+    }
+  }
+
+  handleCancel = async () => {
+    const {
+      actions: { handleBack, stopAnalysis },
+    } = this.props
+
+    try {
+      await stopAnalysis()
+      handleBack()
+    } catch (error) {
+      // pass
+    }
   }
 
   render() {
     const {
-      actions: { handleNext },
       classes,
+      actions: { handleNext },
+      state: {
+        analyzing: { info, progress, verbose },
+      },
     } = this.props
     const { open } = this.state
 
@@ -75,13 +104,14 @@ export default class ProgressAnalysis extends Component {
                 size="small"
                 color="secondary"
                 variant="contained"
-                onClick={() =>
-                  this.setState({
-                    open: true,
-                  })
+                onClick={() => this.setState({
+                  open: true,
+                })
                 }
               >
-                <Icon>cancel</Icon>
+                <Icon>
+                  cancel
+                </Icon>
                 Cancelar
               </Button>
             </Grid>
@@ -94,7 +124,9 @@ export default class ProgressAnalysis extends Component {
                 onClick={handleNext}
               >
                 Ver Reporte
-                <Icon>arrow_forward</Icon>
+                <Icon>
+                  arrow_forward
+                </Icon>
               </Button>
             </Grid>
           </Grid>
@@ -102,31 +134,26 @@ export default class ProgressAnalysis extends Component {
         <Grid item>
           <Card className={classes.card}>
             <CardHeader
-              avatar={
+              avatar={(
                 <Avatar>
-                  <Icon>library_books</Icon>
+                  <Icon>
+                    library_books
+                  </Icon>
                 </Avatar>
-              }
+              )}
               title="Analizando Archivos"
             />
             <CardContent>
               <Grid container spacing={40} justify="center">
                 <Grid item sm={10}>
-                  <Grid container spacing={16} justify="center" alignItems="center">
-                    <Grid item>
-                      <CircularProgress size={32} />
-                    </Grid>
-                    <Grid item>
-                      <Typography align="center" variant="subheading">
-                        Analizando # Archivos
-                      </Typography>
-                    </Grid>
-                  </Grid>
+                  <Typography align="center" variant="subheading">
+                    {info}
+                  </Typography>
                 </Grid>
                 <Grid item sm={10}>
-                  <LinearProgress variant="determinate" value={10} />
+                  <LinearProgress variant="determinate" value={progress} />
                   <Typography align="center" variant="body1">
-                    Accion
+                    {verbose}
                   </Typography>
                 </Grid>
               </Grid>
@@ -142,7 +169,9 @@ export default class ProgressAnalysis extends Component {
                     warning
                   </Icon>
                 </Grid>
-                <Grid item>¿Estás seguro que deceas cancelar?</Grid>
+                <Grid item>
+                  ¿Estás seguro que deceas cancelar?
+                </Grid>
               </Grid>
             </DialogTitle>
             <DialogContent>
@@ -153,10 +182,9 @@ export default class ProgressAnalysis extends Component {
             <DialogActions>
               <Button
                 color="primary"
-                onClick={() =>
-                  this.setState({
-                    open: false,
-                  })
+                onClick={() => this.setState({
+                  open: false,
+                })
                 }
               >
                 Cancelar

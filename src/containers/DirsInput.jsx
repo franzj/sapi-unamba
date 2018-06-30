@@ -2,8 +2,9 @@ import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'utils/store'
 import { withStyles } from '@material-ui/core/styles'
-import { Button, Icon, TextField, Typography, Grid, InputAdornment } from '@material-ui/core'
-
+import {
+  Button, Icon, TextField, Typography, Grid, InputAdornment,
+} from '@material-ui/core'
 
 const styles = theme => ({
   root: {
@@ -26,7 +27,7 @@ export default class DirsInput extends Component {
     }).isRequired,
     state: PropTypes.shape({
       dirs: PropTypes.shape({
-        analisys: PropTypes.object.isRequired,
+        analysis: PropTypes.object.isRequired,
         projects: PropTypes.object.isRequired,
       }).isRequired,
       step: PropTypes.number.isRequired,
@@ -37,27 +38,32 @@ export default class DirsInput extends Component {
     super(props)
 
     this.state = {
-      errorAnalisysDir: false,
+      errorAnalysisDir: false,
       errorProjectsDir: false,
     }
 
     this.dirProjectsRef = createRef()
-    this.dirAnalisysRef = createRef()
+    this.dirAnalysisRef = createRef()
   }
 
   componentDidMount() {
     this.dirProjectsRef.current.webkitdirectory = true
-    this.dirAnalisysRef.current.webkitdirectory = true
+    this.dirAnalysisRef.current.webkitdirectory = true
   }
 
   onNextStep = () => {
-    const { actions, state: { dirs: { analisys, projects } } } = this.props
-    const errorAnalisysDir = analisys.files.length === 0
+    const {
+      actions,
+      state: {
+        dirs: { analysis, projects },
+      },
+    } = this.props
+    const errorAnalysisDir = analysis.files.length === 0
     const errorProjectsDir = projects.files.length === 0
 
-    if (errorAnalisysDir || errorProjectsDir) {
+    if (errorAnalysisDir || errorProjectsDir) {
       this.setState({
-        errorAnalisysDir,
+        errorAnalysisDir,
         errorProjectsDir,
       })
     } else {
@@ -68,7 +74,10 @@ export default class DirsInput extends Component {
   onSelectDir = (event) => {
     try {
       const { searchPDFs } = this.props.actions
-      const { files: [dir], attributes: { targetdir } } = event.target
+      const {
+        files: [dir],
+        attributes: { targetdir },
+      } = event.target
 
       searchPDFs(dir.path, targetdir.value)
     } catch (error) {
@@ -77,8 +86,13 @@ export default class DirsInput extends Component {
   }
 
   render() {
-    const { classes, state: { dirs: { analisys, projects } } } = this.props
-    const { errorAnalisysDir, errorProjectsDir } = this.state
+    const {
+      classes,
+      state: {
+        dirs: { analysis, projects },
+      },
+    } = this.props
+    const { errorAnalysisDir, errorProjectsDir } = this.state
 
     return (
       <Grid container spacing={24} direction="column" className={classes.root}>
@@ -86,19 +100,18 @@ export default class DirsInput extends Component {
           <Grid container justify="space-between">
             <Grid item>
               <Typography variant="headline">
-                <Icon className={classes.icon}>folder</Icon>
+                <Icon className={classes.icon}>
+                  folder
+                </Icon>
                 Configuración de Directorios
               </Typography>
             </Grid>
             <Grid item>
-              <Button
-                size="small"
-                color="primary"
-                variant="contained"
-                onClick={this.onNextStep}
-              >
+              <Button size="small" color="primary" variant="contained" onClick={this.onNextStep}>
                 Continuar
-                <Icon>arrow_forward</Icon>
+                <Icon>
+                  arrow_forward
+                </Icon>
               </Button>
             </Grid>
           </Grid>
@@ -113,14 +126,15 @@ export default class DirsInput extends Component {
                 label="Directorio de banco de proyectos"
                 margin="normal"
                 value={projects.path}
-                helperText={errorProjectsDir
-                  ? 'Seleccione la carpeta con el banco de proyectos.'
-                  : null
+                helperText={
+                  errorProjectsDir ? 'Seleccione la carpeta con el banco de proyectos.' : null
                 }
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Icon>folder</Icon>
+                      <Icon>
+                        folder
+                      </Icon>
                     </InputAdornment>
                   ),
                 }}
@@ -135,7 +149,9 @@ export default class DirsInput extends Component {
                   this.dirProjectsRef.current.click()
                 }}
               >
-                <Icon>folder_open</Icon>
+                <Icon>
+                  folder_open
+                </Icon>
               </Button>
             </Grid>
           </Grid>
@@ -145,19 +161,20 @@ export default class DirsInput extends Component {
             <Grid item sm={11}>
               <TextField
                 fullWidth
-                error={errorAnalisysDir}
+                error={errorAnalysisDir}
                 id="dir-analisys"
                 label="Directorio de entrada de análisis"
                 margin="normal"
-                value={analisys.path}
-                helperText={errorAnalisysDir
-                  ? 'Seleccione la carpeta con proyectos a analizar.'
-                  : null
+                value={analysis.path}
+                helperText={
+                  errorAnalysisDir ? 'Seleccione la carpeta con proyectos a analizar.' : null
                 }
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Icon>folder</Icon>
+                      <Icon>
+                        folder
+                      </Icon>
                     </InputAdornment>
                   ),
                 }}
@@ -169,10 +186,12 @@ export default class DirsInput extends Component {
                 color="primary"
                 variant="fab"
                 onClick={() => {
-                  this.dirAnalisysRef.current.click()
+                  this.dirAnalysisRef.current.click()
                 }}
               >
-                <Icon>folder_open</Icon>
+                <Icon>
+                  folder_open
+                </Icon>
               </Button>
             </Grid>
           </Grid>
@@ -188,8 +207,8 @@ export default class DirsInput extends Component {
         <input
           hidden
           type="file"
-          targetdir="analisys"
-          ref={this.dirAnalisysRef}
+          targetdir="analysis"
+          ref={this.dirAnalysisRef}
           onChange={this.onSelectDir}
         />
       </Grid>

@@ -2,7 +2,7 @@ import React, { Component, createContext } from 'react'
 import PropTypes from 'prop-types'
 import events from 'libs/ipcRendererEvents'
 import { ipcRenderer } from 'electron'
-import { searchPDFs } from 'utils/actions'
+import { searchPDFs, startAnalysis, stopAnalysis } from 'utils/actions'
 
 const Context = createContext()
 
@@ -15,14 +15,23 @@ class Provider extends Component {
     super(props)
 
     this.state = {
+      // eslint-disable-next-line react/no-unused-state
       actions: {
         searchPDFs,
+        startAnalysis,
+        stopAnalysis,
         handleNext: this.handleNext,
         handleBack: this.handleBack,
       },
       state: {
+        analyzing: {
+          info: '',
+          progress: 0,
+          report: [],
+          verbose: '',
+        },
         dirs: {
-          analisys: { files: [], path: '' },
+          analysis: { files: [], path: '' },
           projects: { files: [], path: '' },
         },
         step: 0,
@@ -64,12 +73,18 @@ class Provider extends Component {
   render() {
     const { children } = this.props
 
-    return <Context.Provider value={this.state}>{children}</Context.Provider>
+    return (
+      <Context.Provider value={this.state}>
+        {children}
+      </Context.Provider>
+    )
   }
 }
 
 const connect = WrappedComponent => () => (
-  <Context.Consumer>{context => <WrappedComponent {...context} />}</Context.Consumer>
+  <Context.Consumer>
+    {context => <WrappedComponent {...context} />}
+  </Context.Consumer>
 )
 
 export { Provider, connect }

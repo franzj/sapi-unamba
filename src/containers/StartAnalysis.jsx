@@ -52,17 +52,11 @@ export default class StartAnalysis extends Component {
     }).isRequired,
     state: PropTypes.shape({
       dirs: PropTypes.shape({
-        analisys: PropTypes.object.isRequired,
+        analysis: PropTypes.object.isRequired,
         projects: PropTypes.object.isRequired,
       }).isRequired,
       step: PropTypes.number.isRequired,
     }).isRequired,
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {}
   }
 
   render() {
@@ -70,7 +64,7 @@ export default class StartAnalysis extends Component {
       classes,
       actions,
       state: {
-        dirs: { projects, analisys },
+        dirs: { analysis, projects },
       },
     } = this.props
 
@@ -80,14 +74,18 @@ export default class StartAnalysis extends Component {
           <Grid container justify="space-between">
             <Grid item>
               <Button size="small" color="primary" variant="contained" onClick={actions.handleBack}>
-                <Icon>arrow_back</Icon>
+                <Icon>
+                  arrow_back
+                </Icon>
                 Retroceder
               </Button>
             </Grid>
             <Grid item>
               <Button size="small" color="primary" variant="contained" onClick={actions.handleNext}>
                 Continuar
-                <Icon>arrow_forward</Icon>
+                <Icon>
+                  arrow_forward
+                </Icon>
               </Button>
             </Grid>
           </Grid>
@@ -95,23 +93,31 @@ export default class StartAnalysis extends Component {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardHeader
-              avatar={
+              avatar={(
                 <Avatar aria-label="Recipe">
-                  <Icon>folder</Icon>
+                  <Icon>
+                    folder
+                  </Icon>
                 </Avatar>
-              }
+              )}
               title="Banco de Proyectos Carpeta"
               subheader={projects.path}
             />
             <CardContent>
-              <Typography variant="title">Lista de Archivos PDFs</Typography>
+              <Typography variant="title">
+                Lista de Archivos PDFs
+              </Typography>
               <List className={classes.list}>
                 {projects.files.map(file => (
                   <ListItem key={file} className={classes.listItem}>
                     <ListItemIcon>
-                      <Icon className={classes.listIcon}>folder</Icon>
+                      <Icon className={classes.listIcon}>
+                        folder
+                      </Icon>
                     </ListItemIcon>
-                    <span className={classes.listItemText}>{file}</span>
+                    <span className={classes.listItemText}>
+                      {file}
+                    </span>
                   </ListItem>
                 ))}
               </List>
@@ -121,23 +127,31 @@ export default class StartAnalysis extends Component {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardHeader
-              avatar={
+              avatar={(
                 <Avatar aria-label="Recipe">
-                  <Icon>folder</Icon>
+                  <Icon>
+                    folder
+                  </Icon>
                 </Avatar>
-              }
+              )}
               title="Carpeta a Analizar Proyectos"
-              subheader={analisys.path}
+              subheader={analysis.path}
             />
             <CardContent>
-              <Typography variant="title">Lista de Archivos PDFs</Typography>
+              <Typography variant="title">
+                Lista de Archivos PDFs
+              </Typography>
               <List className={classes.list}>
-                {analisys.files.map(file => (
+                {analysis.files.map(file => (
                   <ListItem key={file} className={classes.listItem}>
                     <ListItemIcon>
-                      <Icon className={classes.listIcon}>folder</Icon>
+                      <Icon className={classes.listIcon}>
+                        folder
+                      </Icon>
                     </ListItemIcon>
-                    <span className={classes.listItemText}>{file}</span>
+                    <span className={classes.listItemText}>
+                      {file}
+                    </span>
                   </ListItem>
                 ))}
               </List>

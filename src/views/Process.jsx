@@ -2,8 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { hot } from 'react-hot-loader'
 import { connect } from 'utils/store'
-import { DirsInput, StartAnalysis, ProgressAnalysis, Report } from 'containers'
-import { Fade, Grid, Step, Stepper, StepLabel } from '@material-ui/core'
+import {
+  DirsInput, StartAnalysis, ProgressAnalysis, Report,
+} from 'containers'
+import {
+  Fade, Grid, Step, Stepper, StepLabel,
+} from '@material-ui/core'
 
 @connect
 @hot(module)
@@ -40,9 +44,7 @@ export default class Process extends Component {
 
   render() {
     const { steps } = this.state
-    const {
-      state: { step },
-    } = this.props
+    const { state: { step } } = this.props
 
     return (
       <Fade in>
@@ -51,12 +53,16 @@ export default class Process extends Component {
             <Stepper activeStep={step} alternativeLabel>
               {steps.map(label => (
                 <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
+                  <StepLabel>
+                    {label}
+                  </StepLabel>
                 </Step>
               ))}
             </Stepper>
           </Grid>
-          <Grid item>{this.getStepProcess(step)}</Grid>
+          <Grid item>
+            {this.getStepProcess(step)}
+          </Grid>
         </Grid>
       </Fade>
     )

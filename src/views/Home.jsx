@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import logo from 'images/logo.png'
 import { withStyles } from '@material-ui/core/styles'
-import { Button, Fade, Grid, Icon, Typography } from '@material-ui/core'
+import {
+  Button, Fade, Grid, Icon, Typography,
+} from '@material-ui/core'
 
 const styles = theme => ({
   root: {
@@ -35,12 +37,16 @@ export default class Home extends Component {
             <img src={logo} alt="logo" />
           </Grid>
           <Grid item>
-            <Typography>SAPI</Typography>
+            <Typography>
+              SAPI
+            </Typography>
           </Grid>
           <Grid item>
             <Button size="large" color="primary" variant="raised" component={Link} to="/process">
               Iniciar proceso
-              <Icon>arrow_forward</Icon>
+              <Icon>
+                arrow_forward
+              </Icon>
             </Button>
           </Grid>
         </Grid>
