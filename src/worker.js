@@ -47,7 +47,10 @@ async function run({ dirs: { analysis, projects } }) {
   postMessage({
     type: UPDATE_PROGRESS_RESPONSE,
     data: {
-      info: 'Iniciando Análisis', verbose: '...', report, progress,
+      info: 'Iniciando Análisis',
+      verbose: '...',
+      report,
+      progress,
     },
   })
 
@@ -102,7 +105,10 @@ async function run({ dirs: { analysis, projects } }) {
   postMessage({
     type: UPDATE_PROGRESS_RESPONSE,
     data: {
-      info: 'Análisis Terminado', verbose: '', progress: 100, report,
+      info: 'Análisis Terminado',
+      verbose: '',
+      progress: 100,
+      report,
     },
   })
 }

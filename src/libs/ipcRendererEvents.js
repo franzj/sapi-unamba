@@ -1,5 +1,7 @@
 import {
-  PDF_LIST_RESPONSE, UPDATE_PROGRESS_RESPONSE, UPDATE_REPORT_RESPONSE,
+  PDF_LIST_RESPONSE,
+  UPDATE_PROGRESS_RESPONSE,
+  UPDATE_REPORT_RESPONSE,
 } from 'utils/constants'
 
 function getPDFsNameFromDir(event, args, state) {

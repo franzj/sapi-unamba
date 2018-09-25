@@ -37,7 +37,7 @@ const styles = theme => ({
 
 @connect
 @withStyles(styles)
-export default class ProgressAnalysis extends Component {
+class ProgressAnalysis extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     actions: PropTypes.shape({
@@ -109,24 +109,20 @@ export default class ProgressAnalysis extends Component {
                 })
                 }
               >
-                <Icon>
-                  cancel
-                </Icon>
+                <Icon>cancel</Icon>
                 Cancelar
               </Button>
             </Grid>
             <Grid item>
               <Button
-                disabled
+                disabled={progress !== 100}
                 size="small"
                 color="secondary"
                 variant="contained"
                 onClick={handleNext}
               >
                 Ver Reporte
-                <Icon>
-                  arrow_forward
-                </Icon>
+                <Icon>arrow_forward</Icon>
               </Button>
             </Grid>
           </Grid>
@@ -136,11 +132,9 @@ export default class ProgressAnalysis extends Component {
             <CardHeader
               avatar={(
                 <Avatar>
-                  <Icon>
-                    library_books
-                  </Icon>
+                  <Icon>library_books</Icon>
                 </Avatar>
-              )}
+)}
               title="Analizando Archivos"
             />
             <CardContent>
@@ -169,9 +163,7 @@ export default class ProgressAnalysis extends Component {
                     warning
                   </Icon>
                 </Grid>
-                <Grid item>
-                  ¿Estás seguro que deceas cancelar?
-                </Grid>
+                <Grid item>¿Estás seguro que deceas cancelar?</Grid>
               </Grid>
             </DialogTitle>
             <DialogContent>
@@ -199,3 +191,5 @@ export default class ProgressAnalysis extends Component {
     )
   }
 }
+
+export default ProgressAnalysis

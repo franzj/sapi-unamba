@@ -43,7 +43,7 @@ const styles = theme => ({
 
 @connect
 @withStyles(styles)
-export default class StartAnalysis extends Component {
+class StartAnalysis extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     actions: PropTypes.shape({
@@ -74,18 +74,14 @@ export default class StartAnalysis extends Component {
           <Grid container justify="space-between">
             <Grid item>
               <Button size="small" color="primary" variant="contained" onClick={actions.handleBack}>
-                <Icon>
-                  arrow_back
-                </Icon>
+                <Icon>arrow_back</Icon>
                 Retroceder
               </Button>
             </Grid>
             <Grid item>
               <Button size="small" color="primary" variant="contained" onClick={actions.handleNext}>
                 Continuar
-                <Icon>
-                  arrow_forward
-                </Icon>
+                <Icon>arrow_forward</Icon>
               </Button>
             </Grid>
           </Grid>
@@ -95,29 +91,21 @@ export default class StartAnalysis extends Component {
             <CardHeader
               avatar={(
                 <Avatar aria-label="Recipe">
-                  <Icon>
-                    folder
-                  </Icon>
+                  <Icon>folder</Icon>
                 </Avatar>
-              )}
+)}
               title="Banco de Proyectos Carpeta"
               subheader={projects.path}
             />
             <CardContent>
-              <Typography variant="title">
-                Lista de Archivos PDFs
-              </Typography>
+              <Typography variant="title">Lista de Archivos PDFs</Typography>
               <List className={classes.list}>
                 {projects.files.map(file => (
                   <ListItem key={file} className={classes.listItem}>
                     <ListItemIcon>
-                      <Icon className={classes.listIcon}>
-                        folder
-                      </Icon>
+                      <Icon className={classes.listIcon}>folder</Icon>
                     </ListItemIcon>
-                    <span className={classes.listItemText}>
-                      {file}
-                    </span>
+                    <span className={classes.listItemText}>{file}</span>
                   </ListItem>
                 ))}
               </List>
@@ -129,29 +117,21 @@ export default class StartAnalysis extends Component {
             <CardHeader
               avatar={(
                 <Avatar aria-label="Recipe">
-                  <Icon>
-                    folder
-                  </Icon>
+                  <Icon>folder</Icon>
                 </Avatar>
-              )}
+)}
               title="Carpeta a Analizar Proyectos"
               subheader={analysis.path}
             />
             <CardContent>
-              <Typography variant="title">
-                Lista de Archivos PDFs
-              </Typography>
+              <Typography variant="title">Lista de Archivos PDFs</Typography>
               <List className={classes.list}>
                 {analysis.files.map(file => (
                   <ListItem key={file} className={classes.listItem}>
                     <ListItemIcon>
-                      <Icon className={classes.listIcon}>
-                        folder
-                      </Icon>
+                      <Icon className={classes.listIcon}>folder</Icon>
                     </ListItemIcon>
-                    <span className={classes.listItemText}>
-                      {file}
-                    </span>
+                    <span className={classes.listItemText}>{file}</span>
                   </ListItem>
                 ))}
               </List>
@@ -162,3 +142,5 @@ export default class StartAnalysis extends Component {
     )
   }
 }
+
+export default StartAnalysis

@@ -73,18 +73,12 @@ class Provider extends Component {
   render() {
     const { children } = this.props
 
-    return (
-      <Context.Provider value={this.state}>
-        {children}
-      </Context.Provider>
-    )
+    return <Context.Provider value={this.state}>{children}</Context.Provider>
   }
 }
 
 const connect = WrappedComponent => () => (
-  <Context.Consumer>
-    {context => <WrappedComponent {...context} />}
-  </Context.Consumer>
+  <Context.Consumer>{context => <WrappedComponent {...context} />}</Context.Consumer>
 )
 
 export { Provider, connect }

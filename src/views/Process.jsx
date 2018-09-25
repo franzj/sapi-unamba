@@ -11,7 +11,7 @@ import {
 
 @connect
 @hot(module)
-export default class Process extends Component {
+class Process extends Component {
   static propTypes = {
     state: PropTypes.shape({
       step: PropTypes.number.isRequired,
@@ -44,7 +44,9 @@ export default class Process extends Component {
 
   render() {
     const { steps } = this.state
-    const { state: { step } } = this.props
+    const {
+      state: { step },
+    } = this.props
 
     return (
       <Fade in>
@@ -53,18 +55,16 @@ export default class Process extends Component {
             <Stepper activeStep={step} alternativeLabel>
               {steps.map(label => (
                 <Step key={label}>
-                  <StepLabel>
-                    {label}
-                  </StepLabel>
+                  <StepLabel>{label}</StepLabel>
                 </Step>
               ))}
             </Stepper>
           </Grid>
-          <Grid item>
-            {this.getStepProcess(step)}
-          </Grid>
+          <Grid item>{this.getStepProcess(step)}</Grid>
         </Grid>
       </Fade>
     )
   }
 }
+
+export default Process

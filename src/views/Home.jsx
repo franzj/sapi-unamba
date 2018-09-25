@@ -15,7 +15,7 @@ const styles = theme => ({
 })
 
 @withStyles(styles)
-export default class Home extends Component {
+class Home extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
   }
@@ -37,16 +37,12 @@ export default class Home extends Component {
             <img src={logo} alt="logo" />
           </Grid>
           <Grid item>
-            <Typography>
-              SAPI
-            </Typography>
+            <Typography>SAPI</Typography>
           </Grid>
           <Grid item>
             <Button size="large" color="primary" variant="raised" component={Link} to="/process">
               Iniciar proceso
-              <Icon>
-                arrow_forward
-              </Icon>
+              <Icon>arrow_forward</Icon>
             </Button>
           </Grid>
         </Grid>
@@ -54,3 +50,5 @@ export default class Home extends Component {
     )
   }
 }
+
+export default Home

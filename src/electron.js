@@ -34,11 +34,13 @@ app.on('ready', async () => {
       // Pass
     }
   } else {
-    mainWindow.loadURL(url.format({
-      pathname: path.join(__dirname, 'index.html'),
-      protocol: 'file:',
-      slashes: true,
-    }))
+    mainWindow.loadURL(
+      url.format({
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: 'file:',
+        slashes: true,
+      }),
+    )
   }
 
   mainWindow.on('closed', () => {

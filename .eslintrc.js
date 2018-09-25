@@ -5,10 +5,11 @@ module.exports = {
   extends: ['airbnb'],
   parser: 'babel-eslint',
   rules: {
-    semi: 'off',
+    semi: ['error', 'never'],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
-    'react/forbid-prop-types': ['error', { forbid: ['any', 'array'] }],
     'react/destructuring-assignment': 'off',
+    'react/forbid-prop-types': ['error', { forbid: ['any', 'array'] }],
+    'react/no-array-index-key': 'off',
   },
   settings: {
     'import/resolver': {

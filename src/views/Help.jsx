@@ -11,7 +11,7 @@ const styles = theme => ({
 })
 
 @withStyles(styles)
-export default class Help extends Component {
+class Help extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
   }
@@ -33,3 +33,5 @@ export default class Help extends Component {
     )
   }
 }
+
+export default Help

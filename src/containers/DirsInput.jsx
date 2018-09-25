@@ -18,7 +18,7 @@ const styles = theme => ({
 
 @connect
 @withStyles(styles)
-export default class DirsInput extends Component {
+class DirsInput extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     actions: PropTypes.shape({
@@ -100,18 +100,14 @@ export default class DirsInput extends Component {
           <Grid container justify="space-between">
             <Grid item>
               <Typography variant="headline">
-                <Icon className={classes.icon}>
-                  folder
-                </Icon>
+                <Icon className={classes.icon}>folder</Icon>
                 Configuración de Directorios
               </Typography>
             </Grid>
             <Grid item>
               <Button size="small" color="primary" variant="contained" onClick={this.onNextStep}>
                 Continuar
-                <Icon>
-                  arrow_forward
-                </Icon>
+                <Icon>arrow_forward</Icon>
               </Button>
             </Grid>
           </Grid>
@@ -132,9 +128,7 @@ export default class DirsInput extends Component {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Icon>
-                        folder
-                      </Icon>
+                      <Icon>folder</Icon>
                     </InputAdornment>
                   ),
                 }}
@@ -149,9 +143,7 @@ export default class DirsInput extends Component {
                   this.dirProjectsRef.current.click()
                 }}
               >
-                <Icon>
-                  folder_open
-                </Icon>
+                <Icon>folder_open</Icon>
               </Button>
             </Grid>
           </Grid>
@@ -172,9 +164,7 @@ export default class DirsInput extends Component {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Icon>
-                        folder
-                      </Icon>
+                      <Icon>folder</Icon>
                     </InputAdornment>
                   ),
                 }}
@@ -189,9 +179,7 @@ export default class DirsInput extends Component {
                   this.dirAnalysisRef.current.click()
                 }}
               >
-                <Icon>
-                  folder_open
-                </Icon>
+                <Icon>folder_open</Icon>
               </Button>
             </Grid>
           </Grid>
@@ -215,3 +203,5 @@ export default class DirsInput extends Component {
     )
   }
 }
+
+export default DirsInput
